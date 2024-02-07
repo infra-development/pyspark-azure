@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+from config import Config
 
 import getpass
 username = getpass.getuser()
@@ -11,14 +12,12 @@ username = getpass.getuser()
 #          .master('yarn')
 #          .getOrCreate()
 #          )
-
-print("username: " + username)
-
+config = Config()
+get_config = config.get_config()
 spark = SparkSession.builder.master("local[*]").appName("spark-session-rdd").getOrCreate()
 
-order_rdd = spark.sparkContext.textFile("D:/files/orders/part-00000")
-
-collected_rdd = order_rdd.collect()
+orders_path = get_config['orders']
+order_rdd = spark.sparkContext.textFile(orders_path)
 
 # Schema
 
@@ -33,29 +32,38 @@ reduced_rdd = mapped_rdd.reduceByKey(lambda x, y: x+y)
 
 reduced_sorted = reduced_rdd.sortBy(lambda x: x[1], False)
 
-reduced_collected = reduced_sorted.collect()
+collected = reduced_sorted.take(3)
+
+for row in collected:
+    print(row)
 
 # 2. Find Premium Customer
 
-mapped_rdd = order_rdd.map(lambda x: (x.split(",")[2], 1))
+customers_rdd = order_rdd.map(lambda x: (x.split(",")[2], 1))
 
-reduced_rdd = mapped_rdd.reduceByKey(lambda x, y : x + y)
+reduced_customer = customers_rdd.reduceByKey(lambda x, y : x + y)
 
-reduced_sorted = reduced_rdd.sortBy(lambda x : x[1], False).take(10)
+sorted_customer = reduced_customer.sortBy(lambda x : x[1], False).take(10)
 
-# 3. Distinct Customer who placed at least 1 order
+for row in sorted_customer:
+    print(row)
+
+# # 3. Distinct Customer who placed at least 1 order
 
 distinct_customer = order_rdd.map(lambda x: (x.split(",")[2])).distinct()
 
-distinct_customer.count()
+print(distinct_customer.count())
 
-# 4. Customer having maximum number of CLOSED order
+# # 4. Customer having maximum number of CLOSED order
 
 filtered_order = order_rdd.filter(lambda x: (x.split(",")[3] == 'CLOSED'))
 
-mapped_rdd = filtered_order.map(lambda x: (x.split(",")[2], 1))
+filtered_customer = filtered_order.map(lambda x: (x.split(",")[2], 1))
 
-reduced_rdd = mapped_rdd.reduceByKey(lambda x, y : x + y)
+customer_sorted = filtered_customer.reduceByKey(lambda x, y : x + y)
 
-reduced_sorted = reduced_rdd.sortBy(lambda x : x[1], False).take(10)
+reduced_sorted = customer_sorted.sortBy(lambda x : x[1], False).take(10)
+
+for row in reduced_sorted:
+    print(row)
 
