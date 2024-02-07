@@ -12,6 +12,7 @@ username = getpass.getuser()
 #          .master('yarn')
 #          .getOrCreate()
 #          )
+
 config = Config()
 get_config = config.get_config()
 spark = SparkSession.builder.master("local[*]").appName("spark-session-rdd").getOrCreate()
