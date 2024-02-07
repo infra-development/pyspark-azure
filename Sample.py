@@ -1,7 +1,10 @@
 from pyspark.sql import SparkSession
 
-spark = SparkSession.builder.master("local[*]").appName("pyspark-azure").getOrCreate()
+spark = SparkSession.builder.master("local[*]").appName("sample").getOrCreate()
 
-df = spark.read.csv("D:/files/business-employment-data.csv")
+rdd_base = spark.sparkContext.textFile("D:/files/business-employment-data.csv")
+#
+rdd_collected = rdd_base.collect()
 
-df.show()
+for row in rdd_collected:
+    print(row)
