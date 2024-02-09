@@ -8,5 +8,6 @@ class Config:
 
     def get_config(self):
         return {
-            'orders': self.config['files']['orders']
+            'orders': self.config['files']['orders'],
+            'orders_wh': self.config['files']['orders_wh']
         }
