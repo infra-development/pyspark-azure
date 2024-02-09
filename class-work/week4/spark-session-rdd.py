@@ -1,7 +1,10 @@
+import sys
 from pyspark.sql import SparkSession
-from config import Config
-
 import getpass
+
+# sys.path.append("../../")
+from config.config import Config
+
 username = getpass.getuser()
 
 # spark1 = (SparkSession
@@ -29,7 +32,7 @@ order_rdd = spark.sparkContext.textFile(orders_path)
 
 mapped_rdd = order_rdd.map(lambda x: (x.split(",")[3], 1))
 
-reduced_rdd = mapped_rdd.reduceByKey(lambda x, y: x+y)
+reduced_rdd = mapped_rdd.reduceByKey(lambda x, y: x + y)
 
 reduced_sorted = reduced_rdd.sortBy(lambda x: x[1], False)
 
@@ -42,9 +45,9 @@ for row in collected:
 
 customers_rdd = order_rdd.map(lambda x: (x.split(",")[2], 1))
 
-reduced_customer = customers_rdd.reduceByKey(lambda x, y : x + y)
+reduced_customer = customers_rdd.reduceByKey(lambda x, y: x + y)
 
-sorted_customer = reduced_customer.sortBy(lambda x : x[1], False).take(10)
+sorted_customer = reduced_customer.sortBy(lambda x: x[1], False).take(10)
 
 for row in sorted_customer:
     print(row)
@@ -61,10 +64,9 @@ filtered_order = order_rdd.filter(lambda x: (x.split(",")[3] == 'CLOSED'))
 
 filtered_customer = filtered_order.map(lambda x: (x.split(",")[2], 1))
 
-customer_sorted = filtered_customer.reduceByKey(lambda x, y : x + y)
+customer_sorted = filtered_customer.reduceByKey(lambda x, y: x + y)
 
-reduced_sorted = customer_sorted.sortBy(lambda x : x[1], False).take(10)
+reduced_sorted = customer_sorted.sortBy(lambda x: x[1], False).take(10)
 
 for row in reduced_sorted:
     print(row)
-
