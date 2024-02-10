@@ -21,8 +21,7 @@ spark.sql("show databases").filter("namespace like 'haresh%'").show()
 spark.sql("show tables").show()
 spark.sql("use haresh_demo")
 spark.sql("show tables").show()  # All the table from retail
-spark.sql(
-    'create table if not exists haresh_demo.order (order_id integer, order_date string, customer_id integer, order_status string)')
+spark.sql('create table if not exists haresh_demo.order (order_id integer, order_date string, customer_id integer, order_status string)')
 spark.sql("show tables").show()
 
 # Inserting data into order table from the view created orders (from orders_df)

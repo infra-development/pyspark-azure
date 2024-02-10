@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from config import Config
+from config.config import Config
 
 config = Config()
 get_config = config.get_config()

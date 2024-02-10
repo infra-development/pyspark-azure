@@ -16,5 +16,7 @@ class Config:
             'order_items': self.config['files']['order_items'],
             'covid19_cases': self.config['files']['covid19_cases'],
             'covid19_states': self.config['files']['covid19_states'],
-            'student_review': self.config['files']['student_review']
+            'student_review': self.config['files']['student_review'],
+            'products': self.config['files']['products'],
+            'groceries': self.config['files']['groceries']
         }
