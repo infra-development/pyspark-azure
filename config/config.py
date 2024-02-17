@@ -11,6 +11,10 @@ class Config:
     def get_config(self):
         return {
             'orders': self.config['files']['orders'],
+            'orders_sample': self.config['files']['orders_sample'],
+            'orders_sample1': self.config['files']['orders_sample1'],
+            'orders_sample2': self.config['files']['orders_sample2'],
+            'orders_sample3': self.config['files']['orders_sample3'],
             'orders_wh': self.config['files']['orders_wh'],
             'customers': self.config['files']['customers'],
             'order_items': self.config['files']['order_items'],
@@ -18,5 +22,6 @@ class Config:
             'covid19_states': self.config['files']['covid19_states'],
             'student_review': self.config['files']['student_review'],
             'products': self.config['files']['products'],
-            'groceries': self.config['files']['groceries']
+            'groceries': self.config['files']['groceries'],
+            'customer_nested': self.config['files']['customer_nested']
         }
