@@ -23,5 +23,9 @@ class Config:
             'student_review': self.config['files']['student_review'],
             'products': self.config['files']['products'],
             'groceries': self.config['files']['groceries'],
-            'customer_nested': self.config['files']['customer_nested']
+            'customer_nested': self.config['files']['customer_nested'],
+            'library_data': self.config['files']['library_data'],
+            'train': self.config['files']['train'],
+            'sales_data': self.config['files']['sales_data'],
+            'hospital': self.config['files']['hospital']
         }
