@@ -17,6 +17,7 @@ class Config:
             'orders_sample3': self.config['files']['orders_sample3'],
             'orders_wh': self.config['files']['orders_wh'],
             'customers': self.config['files']['customers'],
+            'customer_transfer': self.config['files']['customer_transfer'],
             'order_items': self.config['files']['order_items'],
             'covid19_cases': self.config['files']['covid19_cases'],
             'covid19_states': self.config['files']['covid19_states'],
