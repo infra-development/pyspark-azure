@@ -15,6 +15,7 @@ class Config:
             'orders_sample1': self.config['files']['orders_sample1'],
             'orders_sample2': self.config['files']['orders_sample2'],
             'orders_sample3': self.config['files']['orders_sample3'],
+            'order_data': self.config['files']['order_data'],
             'orders_wh': self.config['files']['orders_wh'],
             'customers': self.config['files']['customers'],
             'customer_transfer': self.config['files']['customer_transfer'],
@@ -28,5 +29,8 @@ class Config:
             'library_data': self.config['files']['library_data'],
             'train': self.config['files']['train'],
             'sales_data': self.config['files']['sales_data'],
-            'hospital': self.config['files']['hospital']
+            'hospital': self.config['files']['hospital'],
+            'windowdata': self.config['files']['windowdata'],
+            'windowdata_modified': self.config['files']['windowdata_modified'],
+            'logdata1m': self.config['files']['logdata1m']
         }
